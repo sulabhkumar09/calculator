@@ -56,5 +56,12 @@ pipeline {
                      -Dsonar.login=c05272a8ccf9a4f897ce947e4bbfae686db4c360 '
                 }
             }
+            post { 
+            always { 
+          junit 'test-results.xml'   
+        
+    }
+}
+
         }
     }
