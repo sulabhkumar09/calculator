@@ -69,10 +69,6 @@
         </excludes>
     </configuration>
         </plugin>
-      
-    </plugins>
-    </pluginManagement>
-    <plugins>
          <plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>
@@ -107,7 +103,10 @@
         </execution>
     </executions>
 </plugin>
+      
     </plugins>
+    </pluginManagement>
+        
 
      
   </build>
