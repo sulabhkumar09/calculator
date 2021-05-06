@@ -45,11 +45,20 @@ pipeline {
         steps{  
             script {
                 docker.withRegistry( '', registryCredential ) {
-                     dockerImage.push()
+                    //  dockerImage.push()
+                    bat 'docker push sulabhdocker09/firstdocker:$BUILD_NUMBER'
                      }
                  }
               }
              }
+             stage('Run Docker container on Jenkins Agent') {
+             
+            steps 
+   {
+               bat 'docker run -d -p 8003:8080 sulabhdocker09/firstdocker'
+ 
+            }
+        }
         //      stage("Upload artifact") {
         //     steps {
         //         rtUpload (                             
