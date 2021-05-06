@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdditionController {
 	ModelAndView mv = new ModelAndView();
 
-	@RequestMapping(value="/add.do") 
+	@RequestMapping(value="/add") 
 	public ModelAndView addNumber(HttpServletRequest request, HttpServletResponse response ) {
 		
 		
@@ -28,7 +28,7 @@ public class AdditionController {
 	}
 	
 	
-	@RequestMapping(value="/subtract.do") 
+	@RequestMapping(value="/subtract") 
 	public ModelAndView subtractNumber(HttpServletRequest request, HttpServletResponse response ) {
 		
 		
@@ -43,7 +43,7 @@ public class AdditionController {
 	}
 	
 	
-	@RequestMapping(value="/multiply.do") 
+	@RequestMapping(value="/multiply") 
 	public ModelAndView multiplyNumber(HttpServletRequest request, HttpServletResponse response ) {
 		
 		
@@ -58,7 +58,7 @@ public class AdditionController {
 	}
 	
 	
-	@RequestMapping(value="/divide.do") 
+	@RequestMapping(value="/divide") 
 	public ModelAndView divideNumber(HttpServletRequest request, HttpServletResponse response ) {
 		
 		
