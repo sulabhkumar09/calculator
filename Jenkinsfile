@@ -7,7 +7,7 @@ pipeline {
      environment {                                      
         SERVER_ID = 'my-artifact'
         registry = "sulabhdocker09/docker-test"
-         registryCredential = 'dockerhub'
+         registryCredential = 'sulabhdocker09'
     }
 
         stages { 
