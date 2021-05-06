@@ -6,6 +6,8 @@ pipeline {
     }
      environment {                                      
         SERVER_ID = 'my-artifact'
+        registry = "sulabhdocker09/docker-test"
+         registryCredential = 'dockerhub'
     }
 
         stages { 
@@ -17,13 +19,13 @@ pipeline {
                 }
             }
        
-            stage ('Test') { 
-                steps { 
+            // stage ('Test') { 
+            //     steps { 
                 
-                        bat 'mvn test'
+            //             bat 'mvn test'
                     
-                }
-            }
+            //     }
+            // }
         
             stage ('Build') { 
                 steps { 
@@ -32,32 +34,48 @@ pipeline {
                     
                 }
             }
-             stage("Upload artifact") {
-            steps {
-                rtUpload (                             
-                    serverId: "$SERVER_ID",
-                    spec: '''{
-                          "files": [
-                            {
-                              "pattern": "target/*.war",
-                              "target": "libs-snapshot-local/"
-                            }
-                         ]
-                    }'''
-                )
-            }
+             stage('Building image') {
+      steps{
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
         }
+      }
+             }
+             stage('Deploy Image') {
+        steps{  
+            script {
+                docker.withRegistry( '', registryCredential ) {
+                     dockerImage.push()
+                     }
+                 }
+              }
+            
+        //      stage("Upload artifact") {
+        //     steps {
+        //         rtUpload (                             
+        //             serverId: "$SERVER_ID",
+        //             spec: '''{
+        //                   "files": [
+        //                     {
+        //                       "pattern": "target/*.war",
+        //                       "target": "libs-snapshot-local/"
+        //                     }
+        //                  ]
+        //             }'''
+        //         )
+        //     }
+        // }
 
-            stage ('Sonar Analysis'){
-                 steps{
-                    bat 'mvn sonar:sonar \
-                     -Dsonar.projectKey=Sonar-calculator-code \
-                     -Dsonar.host.url=http://localhost:9000 \
-                     -Dsonar.login=a97a24e8cf9fad8e1282fb52e75539285b10722c'
+        //     stage ('Sonar Analysis'){
+        //          steps{
+        //             bat 'mvn sonar:sonar \
+        //              -Dsonar.projectKey=Sonar-calculator-code \
+        //              -Dsonar.host.url=http://localhost:9000 \
+        //              -Dsonar.login=a97a24e8cf9fad8e1282fb52e75539285b10722c'
                      
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
          post { 
             always { 
           junit 'target/surefire-reports/*.xml'   
