@@ -46,7 +46,7 @@ pipeline {
             script {
                 docker.withRegistry( '', registryCredential ) {
                     //  dockerImage.push()
-                    bat 'docker push sulabhdocker09/firstdocker:$BUILD_NUMBER'
+                    bat 'docker push sulabhdocker09/firstdocker:latest'
                      }
                  }
               }
