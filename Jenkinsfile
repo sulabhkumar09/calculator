@@ -49,7 +49,7 @@ pipeline {
                      }
                  }
               }
-            
+             }
         //      stage("Upload artifact") {
         //     steps {
         //         rtUpload (                             
@@ -75,8 +75,8 @@ pipeline {
                      
         //         }
         //     }
-        // }
-             }
+         }
+             
          post { 
             always { 
           junit 'target/surefire-reports/*.xml'   
