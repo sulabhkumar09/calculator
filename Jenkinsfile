@@ -46,7 +46,7 @@ pipeline {
             script {
                 docker.withRegistry( '', registryCredential ) {
                     //  dockerImage.push()
-                    bat 'docker push sulabhdocker09/docker-test'
+                    bat 'docker push -a sulabhdocker09/docker-test:+"$BUILD_NUMBER"'
                      }
                  }
               }
@@ -55,7 +55,7 @@ pipeline {
              
             steps 
    {
-               bat 'docker run -d -p 8003:8080 sulabhdocker09/docker-test'
+               bat 'docker run -d -p 8003:8080 sulabhdocker09/docker-test:+"$BUILD_NUMBER"'
  
             }
         }
