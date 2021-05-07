@@ -99,7 +99,7 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+        docker.withRegistry( '', registryCredential ) {
           bat  'docker push sulabhdocker09/docker-test1:latest'
         //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
         }
