@@ -36,6 +36,11 @@ pipeline {
                     
                 }
             }
+            stage ('Container down'){
+                steps{
+                    bat 'docker compose down'
+                }
+            }
              stage('Building image') {
       steps{
         script {
