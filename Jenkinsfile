@@ -35,32 +35,32 @@ pipeline {
                 }
             }
             
-             stage('Building image') {
-      steps{
-        script {
-          docker.build registry 
-        //   + ":$BUILD_NUMBER"
-        }
-      }
-             }
-             stage('Deploy Image') {
-        steps{  
-            script {
-                docker.withRegistry( '', registryCredential ) {
-                    //  dockerImage.push()
-                    bat 'docker push sulabhdocker09/docker-test'
-                     }
-                 }
-              }
-             }
-             stage('Run Docker container on Jenkins Agent') {
+//              stage('Building image') {
+//       steps{
+//         script {
+//           docker.build registry 
+//         //   + ":$BUILD_NUMBER"
+//         }
+//       }
+//              }
+//              stage('Deploy Image') {
+//         steps{  
+//             script {
+//                 docker.withRegistry( '', registryCredential ) {
+//                     //  dockerImage.push()
+//                     bat 'docker push sulabhdocker09/docker-test'
+//                      }
+//                  }
+//               }
+//              }
+//              stage('Run Docker container on Jenkins Agent') {
              
-            steps 
-   {
-               bat 'docker run -d -p 8003:8080 sulabhdocker09/docker-test'
+//             steps 
+//   {
+//               bat 'docker run -d -p 8003:8080 sulabhdocker09/docker-test'
  
-            }
-        }
+//             }
+//         }
         //      stage("Upload artifact") {
         //     steps {
         //         rtUpload (                             
@@ -86,6 +86,35 @@ pipeline {
                      
         //         }
         //     }
+        stage('Docker Build and Tag') {
+           steps {
+              
+                bat 'docker build -t docker-test1:latest .' 
+                bat 'docker tag samplewebapp nikhilnidhi/docker-test1:latest'
+                //sh 'docker tag samplewebapp nikhilnidhi/docker-test1:$BUILD_NUMBER'
+               
+          }
+        }
+     
+  stage('Publish image to Docker Hub') {
+          
+            steps {
+        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+          bat  'docker push sulabhdocker09/docker-test1:latest'
+        //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
+        }
+                  
+          }
+        }
+     
+      stage('Run Docker container on Jenkins Agent') {
+             
+            steps 
+   {
+                sh "docker run -d -p 8003:8080 sulabhdocker09/docker-test1"
+ 
+            }
+        }
          }
              
 //          post { 
