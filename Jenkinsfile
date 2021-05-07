@@ -34,11 +34,7 @@ pipeline {
                     
                 }
             }
-            stage ('Container down'){
-                steps{
-                    bat 'docker compose stop'
-                }
-            }
+            
              stage('Building image') {
       steps{
         script {
