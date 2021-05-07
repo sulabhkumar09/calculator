@@ -90,7 +90,7 @@ pipeline {
            steps {
               
                 bat 'docker build -t docker-test1:latest .' 
-                bat 'docker tag samplewebapp nikhilnidhi/docker-test1:latest'
+                bat 'docker tag docker-test1 sulabhdocker09/docker-test1:latest'
                 //sh 'docker tag samplewebapp nikhilnidhi/docker-test1:$BUILD_NUMBER'
                
           }
