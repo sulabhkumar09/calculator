@@ -59,9 +59,9 @@ pipeline {
          stage ('Sonar Analysis'){
                  steps{
                     bat 'mvn sonar:sonar \
-                     -Dsonar.projectKey=Sonar-calculator-code \
+                    -Dsonar.projectKey=Sonar-calculator-code \
                      -Dsonar.host.url=http://localhost:9000 \
-                     -Dsonar.login=a97a24e8cf9fad8e1282fb52e75539285b10722c'
+                     -Dsonar.login=df7a3dcbe740e1b42098aa7f3e0d860ba0676b18'
                      
                 }
             }
