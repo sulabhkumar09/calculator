@@ -100,7 +100,7 @@ pipeline {
                     $port = bat ' docker ps -qf "expose=8080/tcp" '
                     if( name && port ){
                         
-                         bat 'docker stop "${name}"' 
+                         bat 'docker stop "%name%"' 
                           
                     }
                     else{
