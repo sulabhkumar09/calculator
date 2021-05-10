@@ -13,6 +13,7 @@ pipeline {
                      SERVER_ID = 'my-artifact'
                      registry = "sulabhdocker09/docker-test"
                      registryCredential = 'dockerhub'
+                     C_id = null
                 }
 
         stages { 
@@ -108,9 +109,10 @@ pipeline {
              
             steps 
                  {
+                     script{
                      C_id= bat 'docker ps -qf "ancestor=docker-test1:latest"'
                       bat 'docker stop +'$C_id' '
- 
+                     }
                  }
              }
         
