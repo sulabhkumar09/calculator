@@ -96,8 +96,8 @@ pipeline {
         stage('Stop Running Container'){
             steps{
                 script{
-                    $name = bat' docker ps -qf "ancestor=docker-test1" '
-                    $port = bat ' docker ps -qf "expose=8080/tcp" '
+                    name = bat' docker ps -qf "ancestor=docker-test1" '
+                    port = bat ' docker ps -qf "expose=8080/tcp" '
                     if( name && port ){
                         
                          bat 'docker stop "%name%"' 
