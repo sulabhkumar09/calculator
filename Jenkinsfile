@@ -96,8 +96,8 @@ pipeline {
         stage('Stop Running Container'){
             steps{
                 script{
-                    name = bat' docker ps -qf "ancestor=docker-test1" '
-                    port = bat ' docker ps -qf "expose=8080/tcp" '
+                    $name = bat' docker ps -qf "ancestor=docker-test1" '
+                    $port = bat ' docker ps -qf "expose=8080/tcp" '
                     if(!( name && port )){
                         
                           bat "docker run -d -p 8003:8080 sulabhdocker09/docker-test1"
@@ -115,7 +115,7 @@ pipeline {
             steps 
                  {
                      script{
-                     C_id= bat 'docker ps -qf "ancestor=docker-test1"'
+                     $C_id= bat 'docker ps -qf "ancestor=docker-test1"'
                       bat 'docker stop +'$C_id' '
                      }
                  }
