@@ -2,11 +2,11 @@ pipeline {
     
     agent any
     
-    tools{
+    // tools{
         
-             maven 'Default'
-             jdk 'Default'
-         }
+    //          maven 'Default'
+    //          jdk 'Default'
+    //      }
     
      environment {                                      
 
@@ -93,9 +93,9 @@ pipeline {
         stage('Stop Running Container'){
             steps{
                 script{
-                    $name = bat' docker ps -qf "ancestor=docker-test1" '
-                    $port = bat ' docker ps -qf "expose=8080/tcp" '
-                    if( $name && $port ){
+                    name = bat' docker ps -qf "ancestor=docker-test1" '
+                    port = bat ' docker ps -qf "expose=8080/tcp" '
+                    if(!( name && port )){
                       $C_id= bat 'docker ps -qf "ancestor=docker-test1:latest"'
                       bat 'docker stop +'$C_id' '
                     }
