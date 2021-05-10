@@ -99,8 +99,8 @@ pipeline {
                     $name = bat' docker ps -qf "ancestor=docker-test1" '
                     $port = bat ' docker ps -qf "expose=8080/tcp" '
                     if( name && port ){
-                         $C_id= bat 'docker ps -qf "ancestor=docker-test1"'
-                         bat 'docker stop ${C_id}' 
+                        
+                         bat 'docker stop "${name}"' 
                           
                     }
                     else{
