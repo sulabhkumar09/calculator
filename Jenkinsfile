@@ -110,7 +110,7 @@ pipeline {
             steps 
                  {
                      script{
-                     C_id= bat 'docker ps -qf "ancestor=docker-test1:latest"'
+                     C_id= bat 'docker ps -qf "ancestor=docker-test1"'
                       bat 'docker stop +'$C_id' '
                      }
                  }
