@@ -96,8 +96,9 @@ pipeline {
                     name = bat' docker ps -qf "ancestor=docker-test1" '
                     port = bat ' docker ps -qf "expose=8080/tcp" '
                     if(!( name && port )){
-                      $C_id= bat 'docker ps -qf "ancestor=docker-test1:latest"'
-                      bat 'docker stop +'$C_id' '
+                        
+                          bat "docker run -d -p 8003:8080 sulabhdocker09/docker-test1"
+                     
                     }
                 }
             }
@@ -107,7 +108,8 @@ pipeline {
              
             steps 
                  {
-               bat "docker run -d -p 8003:8080 sulabhdocker09/docker-test1"
+                     C_id= bat 'docker ps -qf "ancestor=docker-test1:latest"'
+                      bat 'docker stop +'$C_id' '
  
                  }
              }
