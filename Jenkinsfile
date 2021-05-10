@@ -14,6 +14,8 @@ pipeline {
                      registry = "sulabhdocker09/docker-test"
                      registryCredential = 'dockerhub'
                      C_id = null
+                     name = null
+                     port = null
                 }
 
         stages { 
@@ -100,6 +102,9 @@ pipeline {
                         
                           bat "docker run -d -p 8003:8080 sulabhdocker09/docker-test1"
                      
+                    }
+                    else{
+                        echo "asdsa"
                     }
                 }
             }
