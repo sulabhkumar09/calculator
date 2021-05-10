@@ -68,26 +68,37 @@ pipeline {
             
 
        
-        stage('Docker Build and Tag') {
-           steps {
+    //     stage('Docker Build and Tag') {
+    //       steps {
               
-                bat 'docker build -t docker-test1:latest .' 
-                bat 'docker tag docker-test1 sulabhdocker09/docker-test1:latest'
+    //             bat 'docker build -t docker-test1:latest .' 
+    //             bat 'docker tag docker-test1 sulabhdocker09/docker-test1:latest'
                 
                
-          }
-        }
+    //       }
+    //     }
      
-     stage('Publish image to Docker Hub') {
+    //  stage('Publish image to Docker Hub') {
           
-            steps {
-                script{
-        docker.withRegistry( '', registryCredential ) {
-          bat  'docker push sulabhdocker09/docker-test1:latest'
+    //         steps {
+    //             script{
+    //     docker.withRegistry( '', registryCredential ) {
+    //       bat  'docker push sulabhdocker09/docker-test1:latest'
        
-                 }
+    //              }
+    //         }
+    //       }
+    //     }
+        
+        stage('Stop Running Container'){
+            steps{
+                script{
+                    if(bat 'docker ps --filter "ancestor=docker-test1" && "expose=8080/tcp" '){
+                      C_id= bat 'docker ps -qf "ancestor=docker-test1:latest"'
+                      bat 'docker stop $C_id '
+                    }
+                }
             }
-          }
         }
      
       stage('Run Docker container') {
