@@ -16,55 +16,55 @@ pipeline {
                 }
 
         stages { 
-            stage ('Clean') { 
-                steps { 
+        //     stage ('Clean') { 
+        //         steps { 
                 
-                        bat 'mvn clean'
+        //                 bat 'mvn clean'
                     
-                            }
-                    }
+        //                     }
+        //             }
        
-            stage ('Test') { 
-                steps { 
+        //     stage ('Test') { 
+        //         steps { 
                 
-                        bat 'mvn test'
+        //                 bat 'mvn test'
                     
-                      }
-                 }
+        //               }
+        //          }
         
-            stage ('Build') { 
-                steps { 
+        //     stage ('Build') { 
+        //         steps { 
                 
-                        bat 'mvn install'
+        //                 bat 'mvn install'
                     
-                     }
-                    }
+        //              }
+        //             }
             
-        stage("Upload artifact") {
-            steps {
-                rtUpload (                             
-                    serverId: "$SERVER_ID",
-                    spec: '''{
-                          "files": [
-                            {
-                              "pattern": "target/*.war",
-                              "target": "libs-snapshot-local/"
-                            }
-                         ]
-                    }'''
-                )
-            }
-        }
+        // stage("Upload artifact") {
+        //     steps {
+        //         rtUpload (                             
+        //             serverId: "$SERVER_ID",
+        //             spec: '''{
+        //                   "files": [
+        //                     {
+        //                       "pattern": "target/*.war",
+        //                       "target": "libs-snapshot-local/"
+        //                     }
+        //                  ]
+        //             }'''
+        //         )
+        //     }
+        // }
         
-         stage ('Sonar Analysis'){
-                 steps{
-                    bat 'mvn sonar:sonar \
-                    -Dsonar.projectKey=Sonar-calculator-code \
-                     -Dsonar.host.url=http://localhost:9000 \
-                     -Dsonar.login=df7a3dcbe740e1b42098aa7f3e0d860ba0676b18'
+        //  stage ('Sonar Analysis'){
+        //          steps{
+        //             bat 'mvn sonar:sonar \
+        //             -Dsonar.projectKey=Sonar-calculator-code \
+        //              -Dsonar.host.url=http://localhost:9000 \
+        //              -Dsonar.login=df7a3dcbe740e1b42098aa7f3e0d860ba0676b18'
                      
-                }
-            }
+        //         }
+        //     }
             
 
        
