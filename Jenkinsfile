@@ -101,7 +101,7 @@ pipeline {
                           
                     }
                     else{
-                        echo ${name} ${port}
+                        
                         echo "No Container is Running"
                     }
                 }
