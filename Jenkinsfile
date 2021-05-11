@@ -105,8 +105,7 @@ pipeline {
                 //     }
                 // }
                 
-                        boolean containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStdout: true)
-                        //.trim()
+                        boolean containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStdout: true).trim()
                     
                         if (containerId) {
                             echo "if"
@@ -124,7 +123,7 @@ pipeline {
              
             steps 
                  {
-                    bat "docker run -d -p 8003:8080 sulabhdocker09/docker-test1"
+                    bat "docker run --name calculator_container -d -p 8003:8080 sulabhdocker09/docker-test1"
                  }
              }
         
