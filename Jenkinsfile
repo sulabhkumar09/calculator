@@ -70,8 +70,9 @@ pipeline {
         stage('Docker Build and Tag') {
           steps {
               
-                bat 'docker build -t docker-test1:latest .' 
-                bat 'docker tag docker-test1 sulabhdocker09/docker-test1:latest'
+                   bat 'docker build -t sulabhdocker09/docker-test1:latest .'
+                // bat 'docker build -t docker-test1:latest .' 
+                // bat 'docker tag docker-test1 sulabhdocker09/docker-test1:latest'
                 
                
           }
@@ -93,7 +94,7 @@ pipeline {
              
             steps{
                 script{
-                        bat 'docker ps -qf  expose=8080/tcp |docker ps -qf name=calculator_container | docker container rm -f calculator_container'
+                        bat 'docker ps -qf  expose=8080/tcp && docker ps -qf name=calculator_container | docker container rm -f calculator_container'
                 
                     //     def containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStatus: true)
                         
