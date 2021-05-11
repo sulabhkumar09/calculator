@@ -1,8 +1,6 @@
 pipeline { 
     
-    agent {
-               dockerfile true
-            }
+    agent any
     // tools{
         
     //          maven 'Default'
@@ -97,9 +95,10 @@ pipeline {
                 script{
 
                 
-                        boolean containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStdout: true).trim()
+                        def containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStatus: true)
+                        
                     
-                        if (containerId) {
+                        if (containerId!=0) {
                             echo "if"
                              //bat 'docker stop calculator_container'
                         }
