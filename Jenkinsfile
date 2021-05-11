@@ -1,11 +1,11 @@
 pipeline { 
     
     agent any
-    // tools{
+    tools{
         
-    //          maven 'Default'
-    //          jdk 'Default'
-    //      }
+             maven 'Default'
+             jdk 'Default'
+         }
     
      environment {                                      
 
@@ -15,79 +15,79 @@ pipeline {
                 }
 
         stages { 
-        //     stage ('Clean') { 
-        //         steps { 
+            stage ('Clean') { 
+                steps { 
                 
-        //                 bat 'mvn clean'
+                        bat 'mvn clean'
                     
-        //                     }
-        //             }
+                            }
+                    }
        
-        //     stage ('Test') { 
-        //         steps { 
+            stage ('Test') { 
+                steps { 
                 
-        //                 bat 'mvn test'
+                        bat 'mvn test'
                     
-        //               }
-        //          }
+                      }
+                 }
         
-        //     stage ('Build') { 
-        //         steps { 
+            stage ('Build') { 
+                steps { 
                 
-        //                 bat 'mvn install'
+                        bat 'mvn install'
                     
-        //              }
-        //             }
+                     }
+                    }
             
-        // stage("Upload artifact") {
-        //     steps {
-        //         rtUpload (                             
-        //             serverId: "$SERVER_ID",
-        //             spec: '''{
-        //                   "files": [
-        //                     {
-        //                       "pattern": "target/*.war",
-        //                       "target": "libs-snapshot-local/"
-        //                     }
-        //                  ]
-        //             }'''
-        //         )
-        //     }
-        // }
+        stage("Upload artifact") {
+            steps {
+                rtUpload (                             
+                    serverId: "$SERVER_ID",
+                    spec: '''{
+                          "files": [
+                            {
+                              "pattern": "target/*.war",
+                              "target": "libs-snapshot-local/"
+                            }
+                         ]
+                    }'''
+                )
+            }
+        }
         
-        //  stage ('Sonar Analysis'){
-        //          steps{
-        //             bat 'mvn sonar:sonar \
-        //             -Dsonar.projectKey=Sonar-calculator-code \
-        //              -Dsonar.host.url=http://localhost:9000 \
-        //              -Dsonar.login=df7a3dcbe740e1b42098aa7f3e0d860ba0676b18'
+         stage ('Sonar Analysis'){
+                 steps{
+                    bat 'mvn sonar:sonar \
+                    -Dsonar.projectKey=Sonar-calculator-code \
+                     -Dsonar.host.url=http://localhost:9000 \
+                     -Dsonar.login=df7a3dcbe740e1b42098aa7f3e0d860ba0676b18'
                      
-        //         }
-        //     }
+                }
+            }
             
 
        
-    //     stage('Docker Build and Tag') {
-    //       steps {
+        stage('Docker Build and Tag') {
+          steps {
               
-    //             bat 'docker build -t docker-test1:latest .' 
-    //             bat 'docker tag docker-test1 sulabhdocker09/docker-test1:latest'
+                bat 'docker build -t docker-test1:latest .' 
+                bat 'docker tag docker-test1 sulabhdocker09/docker-test1:latest'
                 
                
-    //       }
-    //     }
+          }
+        }
      
-    //  stage('Publish image to Docker Hub') {
+     stage('Publish image to Docker Hub') {
           
-    //         steps {
-    //             script{
-    //     docker.withRegistry( '', registryCredential ) {
-    //       bat  'docker push sulabhdocker09/docker-test1:latest'
+            steps {
+                script{
+        docker.withRegistry( '', registryCredential ) {
+          bat  'docker push sulabhdocker09/docker-test1:latest'
        
-    //              }
-    //         }
-    //       }
-    //     }
+                 }
+            }
+          }
+        }
         
         stage('Stop Running Container'){
              
@@ -101,6 +101,7 @@ pipeline {
                         if (containerId) {
                             //echo "if"
                              bat 'docker stop calculator_container'
+                             bat 'docker container rm -f calculator_container'
                         }
                         else {
                           echo "No Container is Running"
@@ -149,13 +150,13 @@ pipeline {
 
          }
              
-//          post { 
-//             always { 
-//           junit 'target/surefire-reports/*.xml'   
+         post { 
+            always { 
+          junit 'target/surefire-reports/*.xml'   
         
-//     }
+    }
 
-// }
+}
 
        
 }
