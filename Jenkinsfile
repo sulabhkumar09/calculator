@@ -13,9 +13,6 @@ pipeline {
                      SERVER_ID = 'my-artifact'
                      registry = "sulabhdocker09/docker-test"
                      registryCredential = 'dockerhub'
-                     C_id = null
-                     name = null
-                     port = null
                 }
 
         stages { 
