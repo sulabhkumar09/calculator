@@ -108,8 +108,8 @@ pipeline {
                         boolean containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStdout: true)
                         //.trim()
                     
-                        if (containerId.isEmpty()) {
-                            docker.image('some/image').run("--name ${fullDockerImageName}")
+                        if (containerId) {
+                            echo "if"
                         }
                         else {
                            echo "dc" 
