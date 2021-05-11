@@ -92,19 +92,34 @@ pipeline {
         
         stage('Stop Running Container'){
             steps{
-                script{
-                    name = bat' docker ps -qf "ancestor=docker-test1" '
-                    port = bat ' docker ps -qf "expose=8080/tcp" '
-                    if( name && port ){
+                // script{
+                  
+                //     if( name && port ){
                         
-                         bat 'docker stop "%name%"' 
+                //          bat 'docker stop "%name%"' 
                           
-                    }
-                    else{
+                //     }
+                //     else{
                         
-                        echo "No Container is Running"
+                //         echo "No Container is Running"
+                //     }
+                // }
+                 parallel (
+                "instance1" : {
+                    environment {
+                        containerId = sh(script: "docker ps --quiet --filter name=${sulabhdocker09/docker-test1 }", returnStdout: true).trim()
+                    }
+                    steps {
+                        if (containerId.isEmpty()) {
+                            docker.image('some/image').run("--name ${fullDockerImageName}")
+                        }
+                        else {
+                           echo "dc" 
+                        }
                     }
                 }
+            )
+        }
             }
         }
      
