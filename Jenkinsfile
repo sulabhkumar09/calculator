@@ -104,7 +104,7 @@ pipeline {
                 //         echo "No Container is Running"
                 //     }
                 // }
-                
+                step{
                         containerId = bat (script: "docker ps --quiet --filter 'ancestor=sulabhdocker09/docker-test1'", returnStdout: true).trim()
                     
                         if (containerId.isEmpty()) {
@@ -115,7 +115,7 @@ pipeline {
                         
                     }
               
-        
+                }
             }
         }
      
