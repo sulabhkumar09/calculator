@@ -98,7 +98,7 @@ pipeline {
                         def containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStatus: true)
                         
                     
-                        if (containerId) {
+                        if (containerId!=0) {
                             //echo "if"
                              bat 'docker stop calculator_container'
                              bat 'docker container rm -f calculator_container'
