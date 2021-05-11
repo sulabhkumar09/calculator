@@ -105,7 +105,8 @@ pipeline {
                 //     }
                 // }
                 step{
-                        containerId = bat (script: "docker ps --quiet --filter 'ancestor=sulabhdocker09/docker-test1'", returnStdout: true).trim()
+                        containerId = bat (script: "docker ps --quiet --filter 'ancestor=sulabhdocker09/docker-test1'", returnStdout: true)
+                        //.trim()
                     
                         if (containerId.isEmpty()) {
                             docker.image('some/image').run("--name ${fullDockerImageName}")
