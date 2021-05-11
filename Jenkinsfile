@@ -93,20 +93,20 @@ pipeline {
              
             steps{
                 script{
-
+                        bat 'docker ps -qf  expose=8080/tcp |docker ps -qf name=calculator_container | docker container rm -f calculator_container'
                 
-                        def containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStatus: true)
+                    //     def containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStatus: true)
                         
-                        //echo "${containerId}"
-                        if (containerId!=1) {
-                            //echo "if"
-                             bat 'docker stop calculator_container'
-                             bat 'docker container rm -f calculator_container'
-                        }
-                        else {
-                          echo "No Container is Running"
+                    //     //echo "${containerId}"
+                    //     if (containerId!=1) {
+                    //         //echo "if"
+                    //          bat 'docker stop calculator_container'
+                    //          bat 'docker container rm -f calculator_container'
+                    //     }
+                    //     else {
+                    //       echo "No Container is Running"
                         
-                    }
+                    // }
               
                 }
             }
