@@ -104,21 +104,17 @@ pipeline {
                 //         echo "No Container is Running"
                 //     }
                 // }
-                 parallel (
-                "instance1" : {
-                    environment {
-                        containerId = sh(script: "docker ps --quiet --filter name=${sulabhdocker09/docker-test1 }", returnStdout: true).trim()
-                    }
-                    steps {
+                
+                        containerId = bat (script: "docker ps --quiet --filter 'ancestor=sulabhdocker09/docker-test1'", returnStdout: true).trim()
+                    
                         if (containerId.isEmpty()) {
                             docker.image('some/image').run("--name ${fullDockerImageName}")
                         }
                         else {
                            echo "dc" 
-                        }
+                        
                     }
-                }
-            )
+              
         
             }
         }
