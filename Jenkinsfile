@@ -105,7 +105,7 @@ pipeline {
                 //     }
                 // }
                 
-                        boolean containerId = bat (script: "docker ps -qf 'ancestor=docker-test1'", returnStdout: true)
+                        boolean containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStdout: true)
                         //.trim()
                     
                         if (containerId.isEmpty()) {
