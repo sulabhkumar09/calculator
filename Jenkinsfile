@@ -93,25 +93,16 @@ pipeline {
         stage('Stop Running Container'){
             steps{
                 script{
-                  
-                //     if( name && port ){
-                        
-                //          bat 'docker stop "%name%"' 
-                          
-                //     }
-                //     else{
-                        
-                //         echo "No Container is Running"
-                //     }
-                // }
+
                 
                         boolean containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStdout: true).trim()
                     
                         if (containerId) {
                             echo "if"
+                             //bat 'docker stop calculator_container'
                         }
                         else {
-                           echo "dc" 
+                          echo "No Container is Running"
                         
                     }
               
