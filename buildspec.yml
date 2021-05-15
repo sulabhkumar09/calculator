@@ -9,11 +9,11 @@ phases:
       - echo Nothing to do in the pre_build phase...
   build:
     commands:
-      - echo Build started on `date`
+      - echo Build started on 'date'
       - mvn clean package --quit
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo Build completed on 'date'
 artifacts:
   discard-paths: yes
   files:
