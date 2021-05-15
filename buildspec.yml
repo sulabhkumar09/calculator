@@ -17,7 +17,7 @@ phases:
 artifacts:
   discard-paths: yes
   files:
-    - target/messageUtil-1.0.jar
+    - target/*
 #     -scripts/*
 #     -appspec/*
     
