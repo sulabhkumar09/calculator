@@ -18,6 +18,6 @@ artifacts:
   discard-paths: yes
   files:
     - target/*
-    -scripts/*
-    -appspec/*
+#     -scripts/*
+#     -appspec/*
     
