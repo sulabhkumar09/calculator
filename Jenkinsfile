@@ -39,28 +39,28 @@ pipeline {
                      }
                     }
             
-        stage("Upload artifact") {
-            steps {
-                rtUpload (                             
-                    serverId: "$SERVER_ID",
-                    spec: '''{
-                          "files": [
-                            {
-                              "pattern": "target/*.war",
-                              "target": "libs-snapshot-local/"
-                            }
-                         ]
-                    }'''
-                )
-            }
-        }
+//         stage("Upload artifact") {
+//             steps {
+//                 rtUpload (                             
+//                     serverId: "$SERVER_ID",
+//                     spec: '''{
+//                           "files": [
+//                             {
+//                               "pattern": "target/*.war",
+//                               "target": "libs-snapshot-local/"
+//                             }
+//                          ]
+//                     }'''
+//                 )
+//             }
+//         }
         
          stage ('Sonar Analysis'){
                  steps{
                     bat 'mvn sonar:sonar \
-                    -Dsonar.projectKey=Sonar-calculator-code \
-                     -Dsonar.host.url=http://localhost:9000 \
-                     -Dsonar.login=df7a3dcbe740e1b42098aa7f3e0d860ba0676b18'
+                         -Dsonar.projectKey=jenkinsci \
+                         -Dsonar.host.url=http://13.127.216.146:9000 \
+                         -Dsonar.login=7600d9aaa1f7f5db91b6ff8f9f998a4cffb4c729'
                      
                 }
             }
@@ -90,11 +90,11 @@ pipeline {
           }
         }
         
-        stage('Stop Running Container'){
+//         stage('Stop Running Container'){
              
-            steps{
-                script{
-                        bat 'docker ps -qf  expose=8080/tcp && docker ps -qf name=calculator_container | docker container rm -f calculator_container'
+//             steps{
+//                 script{
+//                         bat 'docker ps -qf  expose=8080/tcp && docker ps -qf name=calculator_container | docker container rm -f calculator_container'
                 
                     //     def containerId = bat (script: "docker ps -qf ancestor=docker-test1", returnStatus: true)
                         
@@ -113,13 +113,13 @@ pipeline {
             }
         }
      
-      stage('Run Docker container') {
+//       stage('Run Docker container') {
              
-            steps 
-                 {
-                    bat "docker run --name calculator_container -d -p 8003:8080 sulabhdocker09/docker-test1"
-                 }
-             }
+//             steps 
+//                  {
+//                     bat "docker run --name calculator_container -d -p 8003:8080 sulabhdocker09/docker-test1"
+//                  }
+//              }
         
         //              stage('Building image') {
 //       steps{
@@ -151,13 +151,13 @@ pipeline {
 
          }
              
-         post { 
-            always { 
-          junit 'target/surefire-reports/*.xml'   
+//          post { 
+//             always { 
+//           junit 'target/surefire-reports/*.xml'   
         
-    }
+//     }
 
-}
+// }
 
        
 }
