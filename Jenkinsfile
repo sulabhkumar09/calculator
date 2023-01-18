@@ -18,7 +18,7 @@ pipeline {
             stage ('Clean') { 
                 steps { 
                 
-                        bat 'mvn clean'
+                        sh 'mvn clean'
                     
                             }
                     }
@@ -26,7 +26,7 @@ pipeline {
             stage ('Test') { 
                 steps { 
                 
-                        bat 'mvn test'
+                        sh 'mvn test'
                     
                       }
                  }
@@ -34,7 +34,7 @@ pipeline {
             stage ('Build') { 
                 steps { 
                 
-                        bat 'mvn install'
+                        sh 'mvn install'
                     
                      }
                     }
@@ -57,7 +57,7 @@ pipeline {
         
          stage ('Sonar Analysis'){
                  steps{
-                    bat 'mvn sonar:sonar \
+                    sh 'mvn sonar:sonar \
                          -Dsonar.projectKey=jenkinsci \
                          -Dsonar.host.url=http://13.127.216.146:9000 \
                          -Dsonar.login=7600d9aaa1f7f5db91b6ff8f9f998a4cffb4c729'
@@ -70,7 +70,7 @@ pipeline {
         stage('Docker Build and Tag') {
           steps {
               
-                   bat 'docker build -t sulabhdocker09/docker-test1:latest .'
+                   sh 'docker build -t sulabhdocker09/docker-test1:latest .'
                 // bat 'docker build -t docker-test1:latest .' 
                 // bat 'docker tag docker-test1 sulabhdocker09/docker-test1:latest'
                 
@@ -83,7 +83,7 @@ pipeline {
             steps {
                 script{
         docker.withRegistry( '', registryCredential ) {
-          bat  'docker push sulabhdocker09/docker-test1:latest'
+          sh  'docker push sulabhdocker09/docker-test1:latest'
        
                  }
             }
