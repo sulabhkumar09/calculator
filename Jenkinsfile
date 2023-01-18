@@ -70,7 +70,7 @@ pipeline {
         stage('Docker Build and Tag') {
           steps {
               
-                   sh 'docker build -t sulabhdocker09/docker-test1:latest .'
+                   sh 'docker build -t sulabhdocker09/docker-mvn:latest .'
                 // bat 'docker build -t docker-test1:latest .' 
                 // bat 'docker tag docker-test1 sulabhdocker09/docker-test1:latest'
                 
@@ -83,7 +83,7 @@ pipeline {
             steps {
                 script{
         docker.withRegistry( '', registryCredential ) {
-          sh  'docker push sulabhdocker09/docker-test1:latest'
+          sh  'docker push sulabhdocker09/docker-mvn:latest'
        
                  }
             }
