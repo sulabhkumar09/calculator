@@ -1,26 +1,15 @@
 pipeline { 
     
     agent any
-//     tools{
-        
-//              maven 'Default'
-//              jdk 'Default'
-//          }
-    
-     environment {                                      
 
-                     SERVER_ID = 'my-artifact'
-                     registry = "sulabhdocker09/docker-mvn"
-                     registryCredential = 'dockerhub'
-                }
 
         stages { 
-            stage ('Clean') { 
+            stage ('Build') { 
                 steps { 
                 
-                        sh 'mvn clean'
+                        sh 'mvn clean install'
                     
-                            }
+                     }
                     }
        
             stage ('Test') { 
@@ -31,30 +20,8 @@ pipeline {
                       }
                  }
         
-            stage ('Build') { 
-                steps { 
-                
-                        sh 'mvn install'
-                    
-                     }
-                    }
             
-//         stage("Upload artifact") {
-//             steps {
-//                 rtUpload (                             
-//                     serverId: "$SERVER_ID",
-//                     spec: '''{
-//                           "files": [
-//                             {
-//                               "pattern": "target/*.war",
-//                               "target": "libs-snapshot-local/"
-//                             }
-//                          ]
-//                     }'''
-//                 )
-//             }
-//         }
-        
+           
          stage ('Sonar Analysis'){
                  steps{
                     sh 'mvn sonar:sonar \
@@ -82,14 +49,22 @@ pipeline {
           
             steps {
                 script{
-        docker.withRegistry( '', registryCredential ) {
-          sh  'docker push sulabhdocker09/docker-mvn:latest'
+                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+                   sh 'docker login -u sulabhdocker09 -p ${dockerhubpwd}'
+                     sh  'docker push sulabhdocker09/docker-mvn:latest'
        
                  }
             }
           }
         }
-        
+            
+            
+        stage('Remove image'){
+             
+           steps{
+               sh 'docker rmi sulabhdocker09/docker-mvn:latest'
+           }
+        }
 //         stage('Stop Running Container'){
              
 //             steps{
