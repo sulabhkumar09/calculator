@@ -1,11 +1,11 @@
 pipeline { 
     
     agent any
-    tools{
+//     tools{
         
-             maven 'Default'
-             jdk 'Default'
-         }
+//              maven 'Default'
+//              jdk 'Default'
+//          }
     
      environment {                                      
 
