@@ -10,7 +10,7 @@ pipeline {
      environment {                                      
 
                      SERVER_ID = 'my-artifact'
-                     registry = "sulabhdocker09/docker-test"
+                     registry = "sulabhdocker09/docker-mvn"
                      registryCredential = 'dockerhub'
                 }
 
